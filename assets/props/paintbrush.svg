@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" role="img" aria-label="A single paintbrush with a wooden handle">
+  <title>Paintbrush</title>
+  <rect x="10" y="24" width="120" height="12" rx="6" fill="#D6A76A" stroke="#201F1A" stroke-width="3"/>
+  <rect x="118" y="20" width="26" height="20" fill="#B8B8B0" stroke="#201F1A" stroke-width="3"/>
+  <path d="M144 18 C170 14 196 20 206 30 C196 40 170 46 144 42 Z" fill="#E8654A" stroke="#201F1A" stroke-width="3"/>
+  <path d="M150 22 C168 20 184 24 192 30" fill="none" stroke="#B23C29" stroke-width="2" opacity="0.6"/>
+</svg>

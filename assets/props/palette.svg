@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 170" role="img" aria-label="A painter's palette with a few blobs of paint on it">
+  <title>Paint palette</title>
+  <path d="M110 8 C168 8 206 42 206 86 C206 126 176 118 158 134 C146 145 150 160 130 162 C60 168 8 132 8 86 C8 42 52 8 110 8 Z" fill="#DFC9A0" stroke="#201F1A" stroke-width="3.5"/>
+  <ellipse cx="112" cy="84" rx="26" ry="20" fill="#FBF8EF" opacity="0.55"/>
+  <circle cx="60" cy="54" r="14" fill="#E8654A" stroke="#201F1A" stroke-width="2.5"/>
+  <circle cx="96" cy="38" r="13" fill="#F0C93E" stroke="#201F1A" stroke-width="2.5"/>
+  <circle cx="140" cy="42" r="13" fill="#3F7C79" stroke="#201F1A" stroke-width="2.5"/>
+  <circle cx="168" cy="70" r="13" fill="#57632B" stroke="#201F1A" stroke-width="2.5"/>
+  <circle cx="60" cy="110" r="13" fill="#D98BA8" stroke="#201F1A" stroke-width="2.5"/>
+</svg>

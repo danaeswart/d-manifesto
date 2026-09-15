@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 190" role="img" aria-label="A small potted succulent plant">
+  <title>Small potted plant</title>
+  <path d="M40 140 L120 140 L110 185 L50 185 Z" fill="#E7C879" stroke="#201F1A" stroke-width="3.5"/>
+  <ellipse cx="80" cy="140" rx="40" ry="10" fill="#D6A76A" stroke="#201F1A" stroke-width="3"/>
+  <path d="M80 140 C60 120 55 90 80 60 C105 90 100 120 80 140 Z" fill="#57632B" stroke="#201F1A" stroke-width="3.5"/>
+  <path d="M80 140 C64 122 54 96 66 70" fill="none" stroke="#3d4a1e" stroke-width="2" opacity="0.6"/>
+  <path d="M80 140 C48 126 38 104 46 84 C64 96 72 116 80 140 Z" fill="#6f8236" stroke="#201F1A" stroke-width="3.5"/>
+  <path d="M80 140 C112 126 122 104 114 84 C96 96 88 116 80 140 Z" fill="#6f8236" stroke="#201F1A" stroke-width="3.5"/>
+</svg>

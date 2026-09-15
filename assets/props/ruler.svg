@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 46" role="img" aria-label="A wooden ruler with tick marks">
+  <title>Ruler</title>
+  <rect x="6" y="6" width="248" height="34" rx="3" fill="#E7C879" stroke="#201F1A" stroke-width="3"/>
+  <g stroke="#201F1A" stroke-width="1.5">
+    <line x1="20" y1="6" x2="20" y2="20"/>
+    <line x1="36" y1="6" x2="36" y2="14"/>
+    <line x1="52" y1="6" x2="52" y2="20"/>
+    <line x1="68" y1="6" x2="68" y2="14"/>
+    <line x1="84" y1="6" x2="84" y2="20"/>
+    <line x1="100" y1="6" x2="100" y2="14"/>
+    <line x1="116" y1="6" x2="116" y2="20"/>
+    <line x1="132" y1="6" x2="132" y2="14"/>
+    <line x1="148" y1="6" x2="148" y2="20"/>
+    <line x1="164" y1="6" x2="164" y2="14"/>
+    <line x1="180" y1="6" x2="180" y2="20"/>
+    <line x1="196" y1="6" x2="196" y2="14"/>
+    <line x1="212" y1="6" x2="212" y2="20"/>
+    <line x1="228" y1="6" x2="228" y2="14"/>
+    <line x1="244" y1="6" x2="244" y2="20"/>
+  </g>
+</svg>

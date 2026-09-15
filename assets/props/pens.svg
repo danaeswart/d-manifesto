@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 140" role="img" aria-label="A loose cluster of pens and pencils">
+  <title>Pens and pencils</title>
+  <g transform="rotate(-18 60 70)">
+    <rect x="30" y="60" width="150" height="16" rx="8" fill="#E8654A" stroke="#201F1A" stroke-width="3"/>
+    <path d="M180 60 L206 68 L180 76 Z" fill="#201F1A"/>
+  </g>
+  <g transform="rotate(-4 60 90)">
+    <rect x="20" y="86" width="160" height="14" rx="7" fill="#F0C93E" stroke="#201F1A" stroke-width="3"/>
+    <path d="M180 86 L204 93 L180 100 Z" fill="#201F1A"/>
+  </g>
+  <g transform="rotate(10 60 110)">
+    <rect x="22" y="104" width="14" height="15" fill="#EFE0C2" stroke="#201F1A" stroke-width="2.5"/>
+    <polygon points="10,111.5 22,104 22,119" fill="#D6A76A" stroke="#201F1A" stroke-width="2.5"/>
+    <polygon points="10,111.5 15,109.5 15,113.5" fill="#3B2A20"/>
+    <rect x="36" y="105" width="150" height="13" fill="#3F7C79" stroke="#201F1A" stroke-width="2.5"/>
+    <rect x="186" y="105" width="16" height="13" fill="#D98BA8" stroke="#201F1A" stroke-width="2.5"/>
+  </g>
+</svg>

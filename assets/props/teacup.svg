@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-label="A cup of tea on a saucer, with the tea bag tag hanging over the rim">
+  <title>Cup of tea</title>
+  <ellipse cx="110" cy="168" rx="88" ry="20" fill="#201F1A" opacity="0.12"/>
+  <ellipse cx="108" cy="160" rx="92" ry="22" fill="#FBF8EF" stroke="#201F1A" stroke-width="3"/>
+  <ellipse cx="108" cy="156" rx="66" ry="12" fill="#EDE4CE" stroke="#201F1A" stroke-width="2"/>
+  <path d="M56 100 Q52 150 78 158 L138 158 Q164 150 160 100 Z" fill="#FBF8EF" stroke="#201F1A" stroke-width="3"/>
+  <ellipse cx="108" cy="100" rx="52" ry="14" fill="#3F7C79" stroke="#201F1A" stroke-width="3"/>
+  <ellipse cx="108" cy="100" rx="52" ry="14" fill="none" stroke="#2C5957" stroke-width="1.5" opacity="0.6"/>
+  <path d="M158 108 Q188 108 186 132 Q184 152 156 148" fill="none" stroke="#201F1A" stroke-width="3" stroke-linecap="round"/>
+  <path d="M96 96 C90 74 100 66 96 48" fill="none" stroke="#9AA79A" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M116 96 C110 70 122 60 116 38" fill="none" stroke="#9AA79A" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+  <line x1="150" y1="96" x2="176" y2="60" stroke="#8C7F5F" stroke-width="2"/>
+  <rect x="168" y="38" width="26" height="20" rx="2" fill="#F0C93E" stroke="#201F1A" stroke-width="2.5" transform="rotate(8 181 48)"/>
+</svg>

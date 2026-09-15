@@ -1,0 +1,677 @@
+/* ==========================================================================
+   TOKENS
+   ========================================================================== */
+:root{
+  --paper: #FBF8EF;
+  --ink: #201F1A;
+  --olive: #57632B;
+  --yellow: #F0C93E;
+  --coral: #E8654A;
+  --teal: #3F7C79;
+  --pink: #D98BA8;
+  --desk: #DCCFB0;
+  --desk-dark: #C9B78D;
+
+  --font-display: 'Archivo Black', 'Arial Black', sans-serif;
+  --font-body: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-hand: 'Kalam', cursive;
+
+  --shadow-paper: 0 10px 22px -8px rgba(32,31,26,0.35), 0 2px 6px rgba(32,31,26,0.18);
+  --shadow-paper-lift: 0 18px 30px -10px rgba(32,31,26,0.42), 0 4px 10px rgba(32,31,26,0.22);
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  height: 100%;
+  margin: 0;
+  background: var(--desk);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overscroll-behavior: none;
+}
+
+body{
+  overflow: hidden;
+}
+
+h1,h2,h3{ margin: 0; }
+p{ margin: 0 0 0.6em; }
+p:last-child{ margin-bottom: 0; }
+
+.sr-only{
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link{
+  position: absolute;
+  left: 8px; top: -60px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 16px;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top .15s ease;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus{ top: 8px; }
+
+:focus-visible{
+  outline: 3px solid var(--coral);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   DESK — the horizontal-scrolling canvas
+   ========================================================================== */
+.desk{
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: stretch;
+  cursor: grab;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 44px),
+    repeating-linear-gradient(0deg, rgba(32,31,26,0.03) 0 1px, transparent 1px 6px),
+    linear-gradient(180deg, var(--desk) 0%, var(--desk-dark) 100%);
+}
+.desk.is-dragging{ cursor: grabbing; }
+
+.desk::-webkit-scrollbar{ height: 10px; }
+.desk::-webkit-scrollbar-track{ background: var(--desk-dark); }
+.desk::-webkit-scrollbar-thumb{ background: var(--ink); border-radius: 6px; opacity: .5; }
+.desk{ scrollbar-color: var(--ink) var(--desk-dark); scrollbar-width: thin; }
+
+.cluster{
+  position: relative;
+  flex: 0 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+  padding: clamp(70px, 10vh, 120px) clamp(28px, 6vw, 90px);
+}
+
+/* Most clusters are a single flex row: min-width (not width) so the row
+   never crushes its papers narrower than their own size — if content needs
+   more room than the guessed figure, the cluster simply grows and the desk
+   scrolls a little further, instead of clipping or overlapping. The one
+   cluster that wraps (how-to-read) uses a real width, since wrapping needs
+   a boundary to wrap against. */
+.cluster--landing{ min-width: clamp(560px, 145vw, 1500px); }
+.cluster--nav{ min-width: clamp(420px, 90vw, 760px); flex-direction: column; align-items: flex-start; justify-content: center; gap: 14px; }
+.cluster--how-to-read{ width: clamp(680px, 165vw, 1700px); flex-wrap: wrap; justify-content: center; row-gap: 20px; }
+.cluster--position{ min-width: clamp(900px, 260vw, 3400px); }
+.cluster--principles-tag{ min-width: clamp(260px, 40vw, 420px); }
+.cluster--principle{ min-width: clamp(520px, 105vw, 980px); }
+.cluster--gutcheck{ min-width: clamp(700px, 130vw, 1250px); }
+.cluster--action-tag{ min-width: clamp(260px, 40vw, 420px); }
+.cluster--casefile{ min-width: clamp(560px, 105vw, 1000px); justify-content: center; }
+.cluster--wall-tag{ min-width: clamp(500px, 90vw, 820px); }
+.cluster--project{ min-width: clamp(700px, 145vw, 1320px); justify-content: center; }
+.cluster--reflection{ min-width: clamp(640px, 140vw, 1300px); }
+.cluster--footer{ min-width: clamp(420px, 70vw, 760px); justify-content: center; gap: 0; }
+/* the final photo and the closing line, pulled close so they read as
+   one last unit instead of two separate notes */
+.footer-pair__stamp{ margin-left: -70px; }
+
+/* ==========================================================================
+   PAPERS — the reusable note/card/polaroid component
+   ========================================================================== */
+.paper{
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-paper);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform .25s ease, box-shadow .25s ease;
+  border-radius: 3px;
+  /* deliberately NOT overflow:hidden/auto here — the tape and pin
+     decoration below are ::before/::after elements that hang out past
+     the paper's own edge on purpose, to look stuck onto the desk */
+}
+.paper:hover{
+  transform: rotate(var(--rot, 0deg)) translateY(-4px) scale(1.015);
+  box-shadow: var(--shadow-paper-lift);
+  z-index: 5;
+}
+
+.paper__content > *:first-child{ margin-top: 0; }
+
+/* -- tag: small eyebrow/label note -- */
+.paper--tag{
+  padding: 14px 20px;
+  width: clamp(180px, 22vw, 260px);
+  font-family: var(--font-hand);
+}
+
+/* pinned to the corner of its cluster instead of sitting in the row */
+.paper--corner{
+  position: absolute;
+  top: clamp(20px, 4vh, 40px);
+  left: clamp(20px, 4vw, 40px);
+  z-index: 6;
+}
+
+/* the "How to read a pinned note" title card, enlarged */
+.paper--htr-title,
+.paper--position-title{
+  width: clamp(320px, 34vw, 460px);
+  padding: clamp(24px, 3vw, 36px);
+}
+.paper--htr-title .note-heading,
+.paper--position-title .note-heading{
+  font-size: clamp(24px, 3vw, 34px);
+}
+.paper--htr-title .note-eyebrow,
+.paper--position-title .note-eyebrow{
+  font-size: clamp(14px, 1.6vw, 17px);
+}
+.paper--section-title{
+  width: clamp(300px, 30vw, 420px);
+  padding: clamp(22px, 2.8vw, 34px);
+}
+.paper--section-title .note-heading{
+  font-size: clamp(22px, 2.8vw, 32px);
+}
+.paper--section-title .note-eyebrow{
+  font-size: clamp(14px, 1.6vw, 17px);
+}
+.paper--reflection-title{
+  width: clamp(340px, 34vw, 470px);
+  padding: clamp(26px, 3.2vw, 40px);
+}
+.paper--reflection-title .note-heading{
+  font-size: clamp(26px, 3.2vw, 36px);
+}
+.paper--principles-title{
+  width: clamp(300px, 30vw, 400px);
+  padding: clamp(22px, 2.8vw, 32px);
+}
+.paper--principles-title .note-heading{
+  font-size: clamp(22px, 2.8vw, 32px);
+}
+
+/* every principle's big statement sticky — the same one paper--sticky
+   rule handles all 8, since it's the only sticky note in that cluster */
+.cluster--principle .paper--sticky{
+  width: clamp(320px, 38vw, 460px);
+  padding: clamp(30px, 3.6vw, 44px);
+}
+.cluster--principle .note-heading{
+  font-size: clamp(24px, 3vw, 34px);
+}
+.cluster--principle .note-quote{
+  font-size: clamp(17px, 2vw, 21px);
+}
+/* the detail card gives up a little width so the new "my values" note
+   between it and the statement has room to sit */
+.cluster--principle .paper--card{
+  width: clamp(210px, 25vw, 300px);
+}
+
+/* small "my values" note between the statement and the detail card */
+.note-value{
+  font-family: var(--font-hand);
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.4;
+}
+
+/* nudges a paper up out of the row's vertical centre, to fill the space
+   left behind when a neighbouring note moves out of the flow */
+.paper--nudge-up{
+  margin-top: -96px; /* ~1 inch */
+}
+.paper--nudge-down{
+  margin-top: 56px;
+}
+
+/* small vertical rhythm utilities — so a row of notes doesn't sit in a
+   dead-straight line, some sit a bit higher, some a bit lower */
+.paper--stagger-up-sm{ margin-top: -36px; }
+.paper--stagger-up-md{ margin-top: -64px; }
+.paper--stagger-up-lg{ margin-top: -140px; }
+.paper--stagger-down-sm{ margin-top: 36px; }
+.paper--stagger-down-md{ margin-top: 64px; }
+.paper--stagger-down-lg{ margin-top: 140px; }
+
+/* photo + caption stacked as one vertical unit instead of side by side */
+.landing-about-stack{
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: -70px;
+}
+
+/* generic vertical pile — two (or more) papers stacked one above the
+   other instead of sitting side by side in the row */
+.paper-stack{
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* -- sticky note -- */
+.paper--sticky{
+  width: clamp(230px, 30vw, 340px);
+  padding: clamp(20px, 2.6vw, 30px);
+  font-family: var(--font-body);
+}
+/* the big landing headline note */
+.paper--hero{
+  width: clamp(380px, 46vw, 640px);
+  padding: clamp(36px, 5vw, 60px);
+}
+.paper--hero .note-heading--xl{
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(34px, 5.4vw, 58px);
+  line-height: 1.1;
+}
+.paper--hero .note-sub{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(20px, 2.6vw, 30px);
+  line-height: 1.35;
+  text-align: left;
+  margin-top: 14px;
+}
+.note-byline{
+  font-family: var(--font-hand);
+  font-size: clamp(13px, 1.4vw, 15px);
+  opacity: 0.7;
+  margin-top: 18px;
+}
+.paper--yellow{ background: var(--yellow); }
+.paper--olive{ background: var(--olive); color: var(--paper); }
+.paper--coral{ background: var(--coral); color: var(--paper); }
+.paper--teal{ background: var(--teal); color: var(--paper); }
+.paper--pink{ background: var(--pink); color: var(--ink); }
+
+/* -- index card -- */
+.paper--card{
+  width: clamp(240px, 30vw, 360px);
+  padding: clamp(20px, 2.6vw, 30px) clamp(20px, 2.6vw, 30px) clamp(20px, 2.6vw, 30px) clamp(34px, 4vw, 46px);
+  background:
+    linear-gradient(var(--paper), var(--paper)) padding-box,
+    repeating-linear-gradient(0deg, transparent 0 30px, rgba(63,124,121,0.14) 30px 31px) content-box;
+  position: relative;
+}
+.paper--card::before{
+  content: "";
+  position: absolute;
+  left: clamp(20px, 2.6vw, 28px);
+  top: 0; bottom: 0;
+  width: 2px;
+  background: var(--coral);
+  opacity: .55;
+}
+.paper--lg{ width: clamp(300px, 34vw, 440px); }
+.paper--xl{ width: clamp(360px, 42vw, 560px); }
+.paper--opening{ width: clamp(260px, 26vw, 340px); }
+
+/* -- polaroid: photo-capable paper -- */
+.paper--polaroid{
+  width: clamp(200px, 24vw, 280px);
+  padding: 14px 14px 34px;
+  background: #fff;
+}
+.paper--polaroid .paper__content{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #EFE7D2;
+}
+.paper--polaroid .paper__image{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.paper--polaroid-sm{
+  width: clamp(120px, 14vw, 170px);
+}
+
+/* -- folder: wide case-file dossier -- */
+.paper--folder{
+  width: clamp(400px, 60vw, 700px);
+  padding: clamp(30px, 3.4vw, 44px) clamp(28px, 3.4vw, 40px);
+  background: #EFE1BE;
+  border: 1px solid rgba(32,31,26,0.15);
+}
+.paper--folder::before{
+  content: "";
+  position: absolute;
+  top: -18px; left: 28px;
+  width: 120px; height: 20px;
+  background: #EFE1BE;
+  border-radius: 6px 6px 0 0;
+  border: 1px solid rgba(32,31,26,0.15);
+  border-bottom: none;
+}
+
+/* -- stamp: footer -- */
+.paper--stamp{
+  width: auto;
+  padding: 26px 40px;
+  border: 4px solid var(--ink);
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+}
+.paper--stamp .note-stamp{
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.4vw, 34px);
+  line-height: 1.25;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+/* -- tape & pin decoration -- */
+.paper--tape-tl::before,
+.paper--tape-tr::before{
+  content: "";
+  position: absolute;
+  top: -14px;
+  width: 64px; height: 26px;
+  background: repeating-linear-gradient(45deg, rgba(240,201,62,0.85) 0 6px, rgba(240,201,62,0.6) 6px 12px);
+  opacity: 0.88;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+.paper--tape-tl::before{ left: -16px; transform: rotate(-40deg); }
+.paper--tape-tr::before{ right: -16px; transform: rotate(40deg); }
+
+.paper--pin::after{
+  content: "";
+  position: absolute;
+  top: -16px; left: 50%;
+  width: 28px; height: 28px;
+  margin-left: -14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff8a75, var(--coral) 60%, #a23a26 100%);
+  box-shadow: 0 4px 7px rgba(0,0,0,0.4);
+}
+
+/* the principle pins get an extra bump — they're the largest pins on the desk */
+.cluster--principle .paper--pin::after{
+  top: -20px;
+  width: 36px; height: 36px;
+  margin-left: -18px;
+}
+
+/* ==========================================================================
+   TEXT STYLES INSIDE PAPERS
+   ========================================================================== */
+.note-eyebrow{
+  font-family: var(--font-hand);
+  font-size: clamp(13px, 1.4vw, 15px);
+  text-transform: lowercase;
+  letter-spacing: 0.3px;
+  opacity: 0.75;
+  margin-bottom: 6px;
+}
+.note-heading{
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.note-heading--xl{ font-size: clamp(28px, 4.2vw, 46px); line-height: 1.15; }
+.note-sub{
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.6vw, 17px);
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+.note-signoff{
+  font-family: var(--font-hand);
+  font-size: clamp(15px, 1.6vw, 18px);
+  margin-top: 10px;
+}
+.note-label{
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(12px, 1.2vw, 13px);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+.note-quote{
+  font-family: var(--font-hand);
+  font-size: clamp(15px, 1.8vw, 19px);
+  margin-top: 10px;
+}
+.note-quote-big{
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.3;
+}
+.note-index{
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 32px);
+  opacity: 0.5;
+  margin-bottom: 2px;
+}
+.note-trace{
+  font-family: var(--font-hand);
+  font-size: clamp(13px, 1.4vw, 15px);
+  color: var(--coral);
+  margin-bottom: 10px;
+}
+.note-folder-title{
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.paper--card p, .paper--folder p, .paper--sticky p{
+  font-size: clamp(13.5px, 1.4vw, 15.5px);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   PROPS
+   ========================================================================== */
+.prop{
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 10px rgba(32,31,26,0.25));
+}
+.prop--teacup{ width: clamp(90px, 10vw, 140px); bottom: 0%; left: 5%; transform: rotate(-8deg); }
+.prop--teacup-2{ width: clamp(80px, 9vw, 120px); bottom: 10%; right: 4%; transform: rotate(-6deg); }
+.prop--pens-reflection{ width: clamp(120px, 14vw, 190px); top: 6%; left: 24%; transform: rotate(-9deg); }
+.prop--palette-reflection{ width: clamp(120px, 14vw, 190px); bottom: 6%; left: 46%; transform: rotate(7deg); }
+.prop--paintbrush-reflection{ width: clamp(150px, 17vw, 230px); top: 5%; right: 22%; transform: rotate(12deg); }
+.prop--pens{ width: clamp(120px, 13vw, 190px); bottom: 8%; left: 4%; transform: rotate(-5deg); }
+.prop--pens-2{ width: clamp(130px, 14vw, 200px); top: 5%; right: 2%; transform: rotate(10deg); }
+.prop--pens-3{ width: clamp(100px, 11vw, 160px); bottom: 3%; right: 1%; transform: rotate(-12deg); }
+.prop--scissors-gutcheck{ width: clamp(100px, 11vw, 150px); top: 6%; left: 4%; transform: rotate(10deg); }
+.prop--paintbrush{ width: clamp(180px, 20vw, 270px); top: 8%; left: 3%; transform: rotate(-10deg); }
+.prop--pens-position{ width: clamp(140px, 16vw, 220px); bottom: 6%; left: 10%; transform: rotate(8deg); }
+.prop--palette{ width: clamp(140px, 16vw, 230px); top: 4%; left: 1%; transform: rotate(-8deg); }
+.prop--ruler-position{ width: clamp(190px, 21vw, 300px); bottom: 16%; right: 4%; transform: rotate(6deg); }
+.prop--palette-position{ width: clamp(140px, 16vw, 220px); bottom: 3%; left: 62%; transform: rotate(-6deg); }
+.prop--ruler-principles{ width: clamp(180px, 20vw, 280px); top: 4%; right: 1%; transform: rotate(-4deg); }
+.prop--ruler-wall{ width: clamp(140px, 16vw, 220px); bottom: 6%; left: 2%; transform: rotate(5deg); }
+.prop--paperclip-1{ width: clamp(50px, 6vw, 80px); top: 3%; right: 2%; transform: rotate(-15deg); }
+.prop--plant-1{ width: clamp(80px, 9vw, 120px); bottom: 1%; left: 1%; transform: rotate(4deg); }
+.prop--pens-lumi{ width: clamp(120px, 14vw, 190px); top: 3%; right: 2%; transform: rotate(-10deg); }
+.prop--palette-ripple{ width: clamp(100px, 12vw, 160px); bottom: 1%; right: 0%; transform: rotate(8deg); }
+.prop--paintbrush-nowcon{ width: clamp(150px, 17vw, 230px); top: 3%; right: 1%; transform: rotate(-8deg); }
+
+/* ==========================================================================
+   NAV NOTES
+   ========================================================================== */
+.nav-heading{
+  margin: 0 0 8px;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(20px, 2.6vw, 30px);
+  width: auto;
+}
+.nav-notes{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  max-width: clamp(280px, 80vw, 600px);
+}
+.nav-note{
+  font-family: var(--font-hand);
+  font-size: clamp(14px, 1.6vw, 17px);
+  background: var(--paper);
+  color: var(--ink);
+  border: none;
+  border-radius: 3px;
+  padding: 12px 18px;
+  box-shadow: var(--shadow-paper);
+  cursor: pointer;
+  transform: rotate(var(--rot, 0deg));
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.nav-note:hover, .nav-note:focus-visible{
+  transform: rotate(var(--rot, 0deg)) translateY(-3px);
+  box-shadow: var(--shadow-paper-lift);
+  background: var(--yellow);
+}
+
+/* ==========================================================================
+   GUT CHECK TOOL
+   ========================================================================== */
+.gutcheck-tool{ display: flex; flex-direction: column; gap: 14px; }
+.gutcheck-list{
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 46vh;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+.gutcheck-item{
+  border-bottom: 1px dashed rgba(32,31,26,0.2);
+  padding-bottom: 12px;
+}
+.gutcheck-question{
+  font-size: clamp(13.5px, 1.4vw, 15px);
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+.gutcheck-actions{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.gutcheck-btn{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 20px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.gutcheck-btn:hover{ background: rgba(32,31,26,0.08); }
+.gutcheck-btn[aria-pressed="true"].gutcheck-btn--yes{ background: var(--coral); color: var(--paper); border-color: var(--coral); }
+.gutcheck-btn[aria-pressed="true"].gutcheck-btn--no{ background: var(--olive); color: var(--paper); border-color: var(--olive); }
+
+.gutcheck-flag{
+  font-family: var(--font-hand);
+  font-size: clamp(13px, 1.4vw, 15px);
+  color: #8a2f1c;
+  margin-top: 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.gutcheck-flag[hidden]{ display: none; }
+
+.gutcheck-result{
+  background: rgba(232,101,74,0.08);
+  border: 1px dashed var(--coral);
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+.gutcheck-result ul{ margin: 6px 0 0; padding-left: 18px; }
+.gutcheck-result li{ margin-bottom: 4px; }
+
+.gutcheck-reset{
+  align-self: flex-start;
+  font-family: var(--font-hand);
+  font-size: 14px;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--ink);
+  padding: 4px 2px;
+}
+
+/* ==========================================================================
+   PROGRESS INDICATOR
+   ========================================================================== */
+.progress-track{
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: 4px;
+  background: rgba(32,31,26,0.15);
+  z-index: 100;
+}
+.progress-fill{
+  height: 100%;
+  width: 0%;
+  background: var(--coral);
+  transition: width .1s linear;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  .desk{ scroll-behavior: auto; }
+  .paper, .nav-note{ transition: none; }
+  .paper:hover{ transform: rotate(var(--rot, 0deg)); }
+  .progress-fill{ transition: none; }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 640px){
+  .cluster{ padding: 60px 20px; gap: 16px; }
+  .prop{ display: none; }
+  .cluster--landing .prop--teacup,
+  .cluster--how-to-read .prop--pens,
+  .cluster--position .prop--paintbrush{ display: block; opacity: .8; }
+  /* the wrapped mobile layout puts cards in different spots than desktop,
+     so this one needs its own clear corner rather than the desktop position */
+  .cluster--how-to-read .prop--pens{ bottom: 1%; left: 1%; width: 80px; }
+  .gutcheck-list{ max-height: 50vh; }
+}

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>design manifesto</title>
+<meta name="description" content="A personal UX design manifesto, laid out across a desk you scroll sideways through.">
+<link rel="icon" type="image/svg+xml" href="assets/props/palette.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#desk">Skip to the manifesto</a>
+
+<p class="sr-only">
+  This page is a photo of a desk, read from left to right. Scroll, swipe, drag,
+  or use the Left and Right arrow keys to move along it. Jump links for each
+  section are on the first sticky note.
+</p>
+
+<div class="progress-track" aria-hidden="true">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<main class="desk" id="desk" tabindex="0" aria-label="The manifesto desk, scrolls horizontally">
+
+  <!-- ============ LANDING ============ -->
+  <section class="cluster cluster--landing" data-cluster-id="landing" aria-label="Landing">
+    <img class="prop prop--teacup" src="assets/props/teacup.svg" alt="A cup of tea on a saucer, with the tea bag tag hanging over the rim">
+
+    <article class="paper paper--tag paper--pin paper--corner" style="--rot:-4deg" data-note-id="landing-kicker">
+      <div class="paper__content"></div>
+    </article>
+
+    <article class="paper paper--sticky paper--yellow paper--tape-tl paper--hero" style="--rot:-1.5deg" data-note-id="landing-hero">
+      <div class="paper__content"></div>
+    </article>
+
+    <article class="paper paper--card paper--opening paper--nudge-down paper--tape-tr" style="--rot:2deg" data-note-id="landing-opening">
+      <div class="paper__content"></div>
+    </article>
+
+    <div class="landing-about-stack">
+      <figure class="paper paper--polaroid paper--pin" style="--rot:-3deg" data-note-id="landing-about-photo">
+        <div class="paper__content"></div>
+      </figure>
+      <article class="paper paper--tag paper--tape-tl" style="--rot:3deg" data-note-id="landing-about-caption">
+        <div class="paper__content"></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ NAV (funky note buttons) ============ -->
+  <section class="cluster cluster--nav" data-cluster-id="nav" aria-label="Jump to a section">
+    <p class="paper paper--sticky paper--yellow paper--pin nav-heading" style="--rot:-2deg">find your way around</p>
+    <nav class="nav-notes" aria-label="Manifesto sections">
+      <button type="button" class="nav-note" style="--rot:2deg" data-goto="position">Design position</button>
+      <button type="button" class="nav-note" style="--rot:-3deg" data-goto="how-to-read">How to read the principles</button>
+      <button type="button" class="nav-note" style="--rot:-2deg" data-goto="principle-1">Principles</button>
+      <button type="button" class="nav-note" style="--rot:3deg" data-goto="gutcheck">The gut check</button>
+      <button type="button" class="nav-note" style="--rot:-1deg" data-goto="action">In action</button>
+      <button type="button" class="nav-note" style="--rot:2.5deg" data-goto="wall">The wall</button>
+    </nav>
+  </section>
+
+  <!-- ============ DESIGN POSITION ============ -->
+  <section class="cluster cluster--position" data-cluster-id="position" aria-label="Design position">
+    <img class="prop prop--paintbrush" src="assets/props/paintbrush.svg" alt="A single paintbrush with a wooden handle">
+    <img class="prop prop--pens-position" src="assets/props/pens.svg" alt="A loose cluster of pens and pencils">
+    <img class="prop prop--palette-position" src="assets/props/palette.svg" alt="A painter's palette with a few blobs of paint on it">
+    <img class="prop prop--ruler-position" src="assets/props/ruler.svg" alt="A wooden ruler with tick marks">
+
+    <article class="paper paper--tag paper--pin paper--position-title" style="--rot:3deg" data-note-id="position-tag">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tl" style="--rot:-1.5deg" data-note-id="position-p1">
+      <div class="paper__content"></div>
+    </article>
+
+    <div class="paper-stack">
+      <article class="paper paper--sticky paper--coral paper--pin" style="--rot:-2.5deg" data-note-id="position-quote-1">
+        <div class="paper__content"></div>
+      </article>
+      <article class="paper paper--card paper--tape-tr" style="--rot:1.5deg" data-note-id="position-p2">
+        <div class="paper__content"></div>
+      </article>
+    </div>
+
+    <div class="paper-stack">
+      <article class="paper paper--card paper--tape-tl" style="--rot:2deg" data-note-id="position-p3">
+        <div class="paper__content"></div>
+      </article>
+      <article class="paper paper--sticky paper--teal paper--pin" style="--rot:2.5deg" data-note-id="position-quote-2">
+        <div class="paper__content"></div>
+      </article>
+    </div>
+
+    <div class="paper-stack">
+      <article class="paper paper--card paper--tape-tr" style="--rot:-1.5deg" data-note-id="position-p4">
+        <div class="paper__content"></div>
+      </article>
+      <article class="paper paper--sticky paper--tape-tl" style="--rot:-1deg" data-note-id="position-p4b">
+        <div class="paper__content"></div>
+      </article>
+    </div>
+
+    <article class="paper paper--card paper--tape-tl paper--stagger-up-md" style="--rot:1.5deg" data-note-id="position-p5">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tr paper--stagger-down-sm" style="--rot:-2deg" data-note-id="position-p6">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--sticky paper--yellow paper--pin paper--stagger-up-md" style="--rot:2deg" data-note-id="position-signoff">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <!-- ============ HOW TO READ A PINNED NOTE ============ -->
+  <section class="cluster cluster--how-to-read" data-cluster-id="how-to-read" aria-label="How to read a pinned note">
+    <img class="prop prop--pens" src="assets/props/pens.svg" alt="A loose cluster of pens and pencils">
+
+    <article class="paper paper--tag paper--pin paper--htr-title" style="--rot:-2deg" data-note-id="htr-tag">
+      <div class="paper__content"></div>
+    </article>
+
+    <article class="paper paper--card paper--tape-tl" style="--rot:2deg" data-note-id="htr-statement">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tr" style="--rot:-2.5deg" data-note-id="htr-why">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tl" style="--rot:1.5deg" data-note-id="htr-changes">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tr" style="--rot:-1.5deg" data-note-id="htr-line">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--pin" style="--rot:2.5deg" data-note-id="htr-gutcheck">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <!-- ============ THE PRINCIPLES ============ -->
+  <section class="cluster cluster--principles-tag" data-cluster-id="principles-tag" aria-label="The principles">
+    <article class="paper paper--tag paper--pin paper--principles-title" style="--rot:-3deg" data-note-id="principles-tag">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--principle" data-cluster-id="principle-1" aria-label="Principle one">
+    <article class="paper paper--sticky paper--olive paper--tape-tl" style="--rot:-2deg" data-note-id="principle-1-statement">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--tag paper--pin" style="--rot:4deg" data-note-id="principle-1-values">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tr" style="--rot:2deg" data-note-id="principle-1-detail">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--principle" data-cluster-id="principle-2" aria-label="Principle two">
+    <article class="paper paper--sticky paper--coral paper--pin" style="--rot:2.5deg" data-note-id="principle-2-statement">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--tag paper--tape-tl" style="--rot:-4deg" data-note-id="principle-2-values">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tl" style="--rot:-1.5deg" data-note-id="principle-2-detail">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--principle" data-cluster-id="principle-3" aria-label="Principle three">
+    <img class="prop prop--palette" src="assets/props/palette.svg" alt="A painter's palette with a few blobs of paint on it">
+    <article class="paper paper--sticky paper--teal paper--tape-tr" style="--rot:-2deg" data-note-id="principle-3-statement">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--tag paper--pin" style="--rot:3deg" data-note-id="principle-3-values">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--pin" style="--rot:1.5deg" data-note-id="principle-3-detail">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--principle" data-cluster-id="principle-4" aria-label="Principle four">
+    <article class="paper paper--sticky paper--yellow paper--pin" style="--rot:2deg" data-note-id="principle-4-statement">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--tag paper--tape-tr" style="--rot:-3deg" data-note-id="principle-4-values">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tl" style="--rot:-2.5deg" data-note-id="principle-4-detail">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--principle" data-cluster-id="principle-5" aria-label="Principle five">
+    <img class="prop prop--pens-2" src="assets/props/pens.svg" alt="A loose cluster of pens and pencils">
+    <article class="paper paper--sticky paper--pink paper--tape-tr" style="--rot:-1.5deg" data-note-id="principle-5-statement">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--tag paper--pin" style="--rot:4deg" data-note-id="principle-5-values">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tl" style="--rot:2deg" data-note-id="principle-5-detail">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--principle" data-cluster-id="principle-6" aria-label="Principle six">
+    <article class="paper paper--sticky paper--olive paper--pin" style="--rot:2.5deg" data-note-id="principle-6-statement">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--tag paper--tape-tl" style="--rot:-4deg" data-note-id="principle-6-values">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tr" style="--rot:-2deg" data-note-id="principle-6-detail">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--principle" data-cluster-id="principle-7" aria-label="Principle seven">
+    <article class="paper paper--sticky paper--coral paper--tape-tl" style="--rot:-2deg" data-note-id="principle-7-statement">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--tag paper--pin" style="--rot:3deg" data-note-id="principle-7-values">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--pin" style="--rot:1.5deg" data-note-id="principle-7-detail">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--principle" data-cluster-id="principle-8" aria-label="Principle eight">
+    <img class="prop prop--ruler-principles" src="assets/props/ruler.svg" alt="A wooden ruler with tick marks">
+    <article class="paper paper--sticky paper--teal paper--pin" style="--rot:2deg" data-note-id="principle-8-statement">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--tag paper--tape-tr" style="--rot:-3deg" data-note-id="principle-8-values">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tl" style="--rot:-1.5deg" data-note-id="principle-8-detail">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <!-- ============ THE GUT CHECK (interactive) ============ -->
+  <section class="cluster cluster--gutcheck" data-cluster-id="gutcheck" aria-label="The gut check, an interactive tool">
+    <img class="prop prop--pens-3" src="assets/props/pens.svg" alt="A loose cluster of pens and pencils">
+    <img class="prop prop--scissors-gutcheck" src="assets/props/scissors.svg" alt="A pair of open scissors">
+
+    <article class="paper paper--sticky paper--yellow paper--pin" style="--rot:-2deg" data-note-id="gutcheck-intro">
+      <div class="paper__content"></div>
+    </article>
+
+    <div class="paper paper--card paper--xl gutcheck-tool" style="--rot:1deg" role="group" aria-labelledby="gutcheckHeading">
+      <h3 id="gutcheckHeading" class="note-heading">Ask yourself</h3>
+      <ol class="gutcheck-list" id="gutcheckList"></ol>
+      <div class="gutcheck-result" id="gutcheckResult" aria-live="polite">
+        <p>Answer a question below to see what it flags.</p>
+      </div>
+      <button type="button" class="gutcheck-reset" id="gutcheckReset">reset all</button>
+    </div>
+  </section>
+
+  <!-- ============ MANIFESTO IN ACTION ============ -->
+  <section class="cluster cluster--action-tag" data-cluster-id="action" aria-label="Manifesto in action">
+    <article class="paper paper--tag paper--pin paper--section-title" style="--rot:2deg" data-note-id="action-tag">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--casefile" data-cluster-id="casefile-1" aria-label="Case file one">
+    <img class="prop prop--paperclip-1" src="assets/props/paperclip.svg" alt="A single paperclip">
+    <article class="paper paper--folder paper--tape-tl" style="--rot:-1.5deg" data-note-id="casefile-1">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+  <section class="cluster cluster--casefile" data-cluster-id="casefile-2" aria-label="Case file two">
+    <article class="paper paper--folder paper--tape-tr" style="--rot:1.5deg" data-note-id="casefile-2">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+  <section class="cluster cluster--casefile" data-cluster-id="casefile-3" aria-label="Case file three">
+    <img class="prop prop--plant-1" src="assets/props/plant.svg" alt="A small potted succulent plant">
+    <article class="paper paper--folder paper--pin" style="--rot:-2deg" data-note-id="casefile-3">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <!-- ============ THE WALL ============ -->
+  <section class="cluster cluster--wall-tag" data-cluster-id="wall" aria-label="The wall">
+    <img class="prop prop--ruler-wall" src="assets/props/ruler.svg" alt="A wooden ruler with tick marks">
+    <article class="paper paper--card paper--lg paper--tape-tl" style="--rot:-1.5deg" data-note-id="wall-intro">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--project" data-cluster-id="lumi" aria-label="Project: Lumi">
+    <img class="prop prop--pens-lumi" src="assets/props/pens.svg" alt="A loose cluster of pens and pencils">
+    <figure class="paper paper--polaroid paper--pin" style="--rot:-3deg" data-note-id="lumi-photo">
+      <div class="paper__content"></div>
+    </figure>
+    <article class="paper paper--card paper--xl paper--tape-tr" style="--rot:2deg" data-note-id="lumi-write">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--project" data-cluster-id="ripple" aria-label="Project: Ripple">
+    <img class="prop prop--palette-ripple" src="assets/props/palette.svg" alt="A painter's palette with a few blobs of paint on it">
+    <figure class="paper paper--polaroid paper--tape-tl" style="--rot:2.5deg" data-note-id="ripple-photo">
+      <div class="paper__content"></div>
+    </figure>
+    <article class="paper paper--card paper--xl paper--pin" style="--rot:-2deg" data-note-id="ripple-write">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <section class="cluster cluster--project" data-cluster-id="nowcon" aria-label="Project: Now Conservation">
+    <img class="prop prop--paintbrush-nowcon" src="assets/props/paintbrush.svg" alt="A single paintbrush with a wooden handle">
+    <figure class="paper paper--polaroid paper--pin" style="--rot:-2.5deg" data-note-id="nowcon-photo">
+      <div class="paper__content"></div>
+    </figure>
+    <article class="paper paper--card paper--lg paper--tape-tr" style="--rot:1.5deg" data-note-id="nowcon-write">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <!-- ============ REFLECTION ============ -->
+  <section class="cluster cluster--reflection" data-cluster-id="reflection" aria-label="Reflection">
+    <img class="prop prop--teacup-2" src="assets/props/teacup.svg" alt="A cup of tea on a saucer, with the tea bag tag hanging over the rim">
+    <img class="prop prop--pens-reflection" src="assets/props/pens.svg" alt="A loose cluster of pens and pencils">
+    <img class="prop prop--palette-reflection" src="assets/props/palette.svg" alt="A painter's palette with a few blobs of paint on it">
+    <img class="prop prop--paintbrush-reflection" src="assets/props/paintbrush.svg" alt="A single paintbrush with a wooden handle">
+
+    <article class="paper paper--tag paper--pin paper--section-title paper--reflection-title" style="--rot:-2deg" data-note-id="reflection-tag">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tl paper--stagger-up-lg" style="--rot:2deg" data-note-id="reflection-1a">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tr paper--stagger-down-sm" style="--rot:-1.5deg" data-note-id="reflection-1b">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--tape-tl paper--stagger-up-sm" style="--rot:1.5deg" data-note-id="reflection-2a">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--pin paper--stagger-down-lg" style="--rot:-2deg" data-note-id="reflection-2b">
+      <div class="paper__content"></div>
+    </article>
+    <article class="paper paper--card paper--pin paper--stagger-up-md" style="--rot:2deg" data-note-id="reflection-3">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <!-- the closing photo and the closing line, grouped together as one
+       last unit rather than sitting in separate clusters -->
+  <section class="cluster cluster--footer footer-pair" data-cluster-id="footer" aria-label="Footer">
+    <figure class="paper paper--polaroid paper--pin" style="--rot:-4deg" data-note-id="reflection-photo">
+      <div class="paper__content"></div>
+    </figure>
+    <article class="paper paper--stamp footer-pair__stamp" style="--rot:-3deg" data-note-id="footer-stamp">
+      <div class="paper__content"></div>
+    </article>
+  </section>
+
+</main>
+
+<script src="notes-config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

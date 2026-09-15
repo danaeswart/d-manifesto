@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 160" role="img" aria-label="A single paperclip">
+  <title>Paperclip</title>
+  <path d="M50 20 C72 20 84 34 84 54 L84 112 C84 132 70 144 52 144 C34 144 22 132 22 114 L22 50 C22 38 30 30 40 30 C50 30 58 38 58 48 L58 108 C58 114 54 118 48 118 C42 118 38 114 38 108 L38 54"
+        fill="none" stroke="#B8B8B0" stroke-width="9" stroke-linecap="round"/>
+  <path d="M50 20 C72 20 84 34 84 54 L84 112 C84 132 70 144 52 144 C34 144 22 132 22 114 L22 50 C22 38 30 30 40 30 C50 30 58 38 58 48 L58 108 C58 114 54 118 48 118 C42 118 38 114 38 108 L38 54"
+        fill="none" stroke="#201F1A" stroke-width="3"/>
+</svg>
